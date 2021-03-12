@@ -1,8 +1,5 @@
 import { createOffersArray } from './data.js';
 
-const mapCanvas = document.querySelector('#map-canvas');
-const tempOffersContainer = document.createDocumentFragment();
-
 // Создаем массив из данных о 10 объявлениях
 const offersArray = createOffersArray(10);
 
@@ -61,7 +58,8 @@ const getOfferType = (offerType) => {
 };
 
 // Заполняем объявление временными данными
-const fillOffer = ({author, offer}) => {
+const createOffer = (item) => {
+  const { author, offer } = item;
   const cardTemplate = document.querySelector('#card').content.querySelector('.popup').cloneNode(true);
   const avatar = cardTemplate.querySelector('.popup__avatar');
   const title = cardTemplate.querySelector('.popup__title');
@@ -85,19 +83,8 @@ const fillOffer = ({author, offer}) => {
   features.innerHTML = getOfferFeatures(offer.features);
   photosContainer.innerHTML = getOfferPhotos(offer.photos);
 
-  tempOffersContainer.appendChild(cardTemplate);
+  return cardTemplate;
 };
 
-// Рендерим первое объявление на карту
-// const renderFirstOffer = () => {
-//   mapCanvas.appendChild(tempOffersContainer.firstChild);
-// };
-
-offersArray.forEach((item) => {
-  //console.log(item);
-  fillOffer(item);
-});
-
-//renderFirstOffer();
-//console.log(tempOffersContainer);
+export { offersArray, createOffer };
 

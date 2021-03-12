@@ -20,7 +20,7 @@ const roomsFilterSelect = mapFiltersForm.querySelector('#housing-rooms');
 const guestsFilterSelect = mapFiltersForm.querySelector('#housing-guests');
 const featuresFilterFieldset = mapFiltersForm.querySelector('#housing-features');
 
-const setInactive = () => {
+const setFormInactive = () => {
   // Отключаем поля формы
   addForm.classList.add('ad-form--disabled');
   avatarInput.disabled = true;
@@ -47,7 +47,7 @@ const setInactive = () => {
   featuresFilterFieldset.disabled = true;
 };
 
-const setActive = () => {
+const setFormActive = () => {
   addForm.classList.remove('ad-form--disabled');
   avatarInput.disabled = false;
   titleInput.disabled = false;
@@ -72,4 +72,6 @@ const setActive = () => {
   featuresFilterFieldset.disabled = false;
 };
 
-export { setInactive, setActive };
+setFormInactive();
+
+export { setFormActive };
