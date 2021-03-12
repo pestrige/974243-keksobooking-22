@@ -31,4 +31,16 @@ const generateFloat = (a, b, digits) => {
 
 const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
-export { generateInt, generateFloat, isEscEvent };
+// свой Debounce
+
+const debounce = (fn, ms) => {
+  let timeout;
+
+  return function () {
+    const callFn = () => fn.apply(this, arguments);
+    clearTimeout(timeout);
+    timeout = setTimeout(callFn, ms);
+  };
+};
+
+export { generateInt, generateFloat, isEscEvent, debounce };
