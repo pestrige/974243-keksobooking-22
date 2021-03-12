@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
-* Студент: [Dmitry Korovin](https://up.htmlacademy.ru/javascript/22/user/974243).
-* Наставник: `Неизвестно`.
+* Студент: [Dmitry Korovin](https://htmlacademy.ru/profile/dimdrim).
+* Наставник: [Artik Man](https://htmlacademy.ru/profile/id1445657).
 
 ---
 
