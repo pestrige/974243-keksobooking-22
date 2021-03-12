@@ -89,15 +89,15 @@ const fillOffer = ({author, offer}) => {
 };
 
 // Рендерим первое объявление на карту
-const renderFirstOffer = () => {
-  mapCanvas.appendChild(tempOffersContainer.firstChild);
-};
+// const renderFirstOffer = () => {
+//   mapCanvas.appendChild(tempOffersContainer.firstChild);
+// };
 
 offersArray.forEach((item) => {
   //console.log(item);
   fillOffer(item);
 });
 
-renderFirstOffer();
+//renderFirstOffer();
 //console.log(tempOffersContainer);
 
