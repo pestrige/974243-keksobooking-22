@@ -27,4 +27,8 @@ const generateFloat = (a, b, digits) => {
   return (Math.trunc(random * exponent) / exponent).toFixed(digits); //toFixed для отображения нулей
 };
 
-export { generateInt, generateFloat };
+// Проверяем нажата ли Ecs
+
+const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
+
+export { generateInt, generateFloat, isEscEvent };
