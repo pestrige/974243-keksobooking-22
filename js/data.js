@@ -22,12 +22,12 @@ const MAX_PRICE = 10000000;
 const MAX_ROOMS = 15;
 const MAX_GUESTS = 20;
 
-const createAdsArray = (length) => {
-  const adsArray = new Array(length).fill('').map(() => createAd());
+const createOffersArray = (length) => {
+  const adsArray = new Array(length).fill('').map(() => createOffer());
   return adsArray;
 };
 
-const createAd = () => {
+const createOffer = () => {
   const getRandomArrayElement = (array) => array[generateInt(0, array.length - 1)];
   const getFixedLengthArray = (array, startIndex = 0) => {
     const fixedLength = generateInt(startIndex, array.length);
@@ -61,5 +61,4 @@ const createAd = () => {
   };
 };
 
-createAdsArray(10);
-//console.log(createAdsArray(10));
+export { createOffersArray };

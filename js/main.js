@@ -1,3 +1,4 @@
 
+import './render-offers.js';
 
-import './data.js';
+
