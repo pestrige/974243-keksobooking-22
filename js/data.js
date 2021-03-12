@@ -18,7 +18,7 @@ const LONGITUDE_RANGE = {
   min: 139.70000,
   max: 139.80000,
 };
-const MAX_PRICE = 10000000;
+const MAX_PRICE = 1000000;
 const MAX_ROOMS = 15;
 const MAX_GUESTS = 20;
 
