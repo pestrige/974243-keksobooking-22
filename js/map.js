@@ -1,17 +1,23 @@
 /* global L:readonly */
-import { setFormActive } from './form-states.js';
+import { setFormActive, setFiltersActive } from './form-states.js';
 import { createOffer } from './create-offer.js';
 import { getData } from './data.js';
+import { filtersHandler } from './filters.js';
 
 const MAX_FLOAT = 5;
-const CENTER_TOKIO_LAT = 35.66332;
-const CENTER_TOKIO_LNG = 139.78140;
+const DEFAULT_COORDINATES = {
+  lat: 35.66332,
+  lng: 139.78141,
+};
 
 const addressInput = document.querySelector('#address');
+const markers = [];
 
-// Рендерим маркеры с объявлениями
-const renderOffers = (data) => {
-  data.forEach((offer) => {
+const resetAddress = () => addressInput.value = `${DEFAULT_COORDINATES.lat}, ${DEFAULT_COORDINATES.lng}`;
+
+// Создаем маркеры и добавляем их на карту
+const createMarkers = (offersArray) => {
+  offersArray.forEach((offer) => {
     const { location } = offer;
     const marker = L.marker(
       {
@@ -22,6 +28,7 @@ const renderOffers = (data) => {
         icon: customPinIcon,
       },
     );
+    markers.push(marker);
 
     // Добавляем маркеры с балунами
     marker
@@ -30,13 +37,25 @@ const renderOffers = (data) => {
   });
 };
 
+const removeMarkers = () => {
+  markers.forEach((marker) => marker.remove());
+};
+
+// Обертка для рендера карт и отслеживания фильтров
+const renderOffers = (data) => {
+  //console.log(data);
+  filtersHandler(data);
+  createMarkers(data);
+};
+
 // Действия после загрузке карты
 const onMapLoad = () => {
-  addressInput.value = `${CENTER_TOKIO_LNG}, ${CENTER_TOKIO_LNG}`;
+  resetAddress();
   setFormActive();
   getData((data) => {
     //console.log(data);
     renderOffers(data);
+    setFiltersActive();
   });
 };
 
@@ -50,8 +69,8 @@ const setAddressCoordinates = (evt) => {
 //Инициализируем карту с маркерами
 const map = L.map('map-canvas')
   .setView({
-    lat: CENTER_TOKIO_LAT,
-    lng: CENTER_TOKIO_LNG,
+    lat: DEFAULT_COORDINATES.lat,
+    lng: DEFAULT_COORDINATES.lng,
   }, 12)
   .on('load', onMapLoad());
 
@@ -69,14 +88,18 @@ const customPinIcon = L.icon({
 
 const mainPinMarker = L.marker(
   {
-    lat: 35.66332,
-    lng: 139.78140,
+    lat: DEFAULT_COORDINATES.lat,
+    lng: DEFAULT_COORDINATES.lng,
   },
   {
     draggable: true,
     icon: mainPinIcon,
   },
 );
+
+const setMarkerDefaults = () => {
+  mainPinMarker.setLatLng(DEFAULT_COORDINATES);
+};
 
 // Добавляем слои от OpenStreetMap
 L.tileLayer(
@@ -90,3 +113,5 @@ mainPinMarker.addTo(map);
 
 // Подписываемся на перемещение главного маркера
 mainPinMarker.on('moveend', setAddressCoordinates);
+
+export { resetAddress, setMarkerDefaults, createMarkers, removeMarkers };

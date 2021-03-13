@@ -927,7 +927,7 @@ fieldset {
   left: 0;
   right: 0;
   top: 35%;
-  z-index: 999;
+  z-index: 1001;
   padding: 20px 5px;
 
   font-size: 2em;
@@ -941,7 +941,7 @@ fieldset {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 1001;
 
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

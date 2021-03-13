@@ -1,77 +1,29 @@
 const addForm = document.querySelector('.ad-form');
-const avatarInput = addForm.querySelector('#avatar');
-const titleInput = addForm.querySelector('#title');
-const addressInput = addForm.querySelector('#address');
-const typeSelect = addForm.querySelector('#type');
-const priceInput = addForm.querySelector('#price');
-const timeinSelect = addForm.querySelector('#timein');
-const timeoutSelect = addForm.querySelector('#timeout');
-const roomsSelect = addForm.querySelector('#room_number');
-const guestsSelect = addForm.querySelector('#capacity');
-const featuresFieldset = addForm.querySelector('.features');
-const descriptionTextarea = addForm.querySelector('#description');
-const photosInput = addForm.querySelector('#images');
-const submitFieldset = addForm.querySelector('.ad-form__element--submit');
-
+const addFormElements = addForm.querySelectorAll('ad-form__element');
 const mapFiltersForm = document.querySelector('.map__filters');
-const typeFilterSelect = mapFiltersForm.querySelector('#housing-type');
-const priceFilterSelect = mapFiltersForm.querySelector('#housing-price');
-const roomsFilterSelect = mapFiltersForm.querySelector('#housing-rooms');
-const guestsFilterSelect = mapFiltersForm.querySelector('#housing-guests');
-const featuresFilterFieldset = mapFiltersForm.querySelector('#housing-features');
+const mapFilters = addForm.querySelectorAll('.map__filter');
+const mapFeatures = document.querySelector('.map__features');
 
-const setFormInactive = () => {
-  // Отключаем поля формы
-  addForm.classList.add('ad-form--disabled');
-  avatarInput.disabled = true;
-  titleInput.disabled = true;
-  addressInput.disabled = true;
-  typeSelect.disabled = true;
-  priceInput.disabled = true;
-  timeinSelect.disabled = true;
-  timeoutSelect.disabled = true;
-  roomsSelect.disabled = true;
-  guestsSelect.disabled = true;
-  featuresFieldset.disabled = true;
-  descriptionTextarea.disabled = true;
-  photosInput.disabled = true;
-  submitFieldset.disabled = true;
-  mapFiltersForm.disabled = true;
-
-  //Отключаем фильтры
-  mapFiltersForm.classList.add('map__filters--disabled');
-  typeFilterSelect.disabled = true;
-  priceFilterSelect.disabled = true;
-  roomsFilterSelect.disabled = true;
-  guestsFilterSelect.disabled = true;
-  featuresFilterFieldset.disabled = true;
-};
+// const setFormInactive = () => {
+//   addForm.classList.add('ad-form--disabled');
+//   addFormElements.forEach(FormElement => FormElement.disabled = true);
+// };
 
 const setFormActive = () => {
   addForm.classList.remove('ad-form--disabled');
-  avatarInput.disabled = false;
-  titleInput.disabled = false;
-  addressInput.disabled = false;
-  typeSelect.disabled = false;
-  priceInput.disabled = false;
-  timeinSelect.disabled = false;
-  timeoutSelect.disabled = false;
-  roomsSelect.disabled = false;
-  guestsSelect.disabled = false;
-  featuresFieldset.disabled = false;
-  descriptionTextarea.disabled = false;
-  photosInput.disabled = false;
-  submitFieldset.disabled = false;
-  mapFiltersForm.disabled = false;
-
-  mapFiltersForm.classList.remove('map__filters--disabled');
-  typeFilterSelect.disabled = false;
-  priceFilterSelect.disabled = false;
-  roomsFilterSelect.disabled = false;
-  guestsFilterSelect.disabled = false;
-  featuresFilterFieldset.disabled = false;
+  addFormElements.forEach(FormElement => FormElement.disabled = false);
 };
 
-setFormInactive();
+// const setFiltersInactive = () => {
+//   mapFiltersForm.classList.add('map__filters--disabled');
+//   mapFilters.forEach(element => element.disabled = true);
+//   mapFeatures.disabled = true;
+// };
 
-export { setFormActive };
+const setFiltersActive = () => {
+  mapFiltersForm.classList.remove('map__filters--disabled');
+  mapFilters.forEach(element => element.disabled = false);
+  mapFeatures.disabled = false;
+};
+
+export {setFormActive, setFiltersActive };

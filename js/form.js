@@ -1,4 +1,8 @@
 import { debounce } from './util.js';
+import { resetAddress, setMarkerDefaults } from './map.js';
+import { showSuccessPopup, showErrorPopup } from './messages.js';
+import { sendData } from './data.js';
+import { filtersForm } from './filters.js';
 
 const CHECK_DELAY = 500;
 const PALACE_ROOMS = 100;
@@ -99,9 +103,40 @@ const onSelectChange = (evt) => {
   currentField.reportValidity();
 };
 
+// Функция очистки формы
+const resetForm = (evt) => {
+  evt.target.reset();
+  setTimeout(() => resetAddress(), 0);
+  setMarkerDefaults();
+  filtersForm.reset();
+};
+
+//Очищаем форму
+const onFormReset = (evt) => resetForm(evt);
+
+// Отправляем форму
+const onFormSubmit = (evt) => {
+  evt.preventDefault();
+
+  sendData(
+    () => {
+      resetForm(evt);
+      showSuccessPopup();
+    },
+    () => {
+      showErrorPopup();
+    },
+    new FormData(evt.target),
+  );
+};
+
 typeSelect.addEventListener('change', onTypeSelectChange);
 timeinSelect.addEventListener('change', onTimeSelectChange);
+timeoutSelect.addEventListener('change', onTimeSelectChange);
 titleInput.addEventListener('input', onTitleInputDebouncedInput);
 priceInput.addEventListener('input', onPriceInputDebouncedInput);
 roomsSelect.addEventListener('change', onSelectChange);
 guestsSelect.addEventListener('change', onSelectChange);
+
+adForm.addEventListener('reset', onFormReset);
+adForm.addEventListener('submit', onFormSubmit);
