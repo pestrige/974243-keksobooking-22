@@ -1,11 +1,12 @@
-import { createOffersArray } from './data.js';
-
-// Создаем массив из данных о 10 объявлениях
-const offersArray = createOffersArray(10);
-
 // Получаем иконки удобств на основе данных
-const getOfferFeatures = (featuresArray) => {
+const getOfferFeatures = (featuresArray, featuresContainer) => {
   let featuresTextList = '';
+
+  if (featuresArray.length === 0) {
+    featuresContainer.style.display = 'none';
+    return featuresTextList;
+  }
+
   featuresArray.forEach((item) => {
     switch (item) {
       case 'wifi':
@@ -32,11 +33,16 @@ const getOfferFeatures = (featuresArray) => {
 };
 
 // Получаем HTML элементы фоток объявления
-const getOfferPhotos = (photosAray) => {
+const getOfferPhotos = (photosAray, photosContainer) => {
   let photosTextList = '';
-  photosAray.forEach((item) => {
-    photosTextList += `<img src="${item}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`;
-  });
+
+  if (photosAray.length === 0) {
+    photosContainer.style.display = 'none';
+  } else {
+    photosAray.forEach((item) => {
+      photosTextList += `<img src="${item}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`;
+    });
+  }
   return photosTextList;
 };
 
@@ -80,11 +86,11 @@ const createOffer = (item) => {
   capacity.textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   time.textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   type.textContent = getOfferType(offer.type);
-  features.innerHTML = getOfferFeatures(offer.features);
-  photosContainer.innerHTML = getOfferPhotos(offer.photos);
+  features.innerHTML = getOfferFeatures(offer.features, features);
+  photosContainer.innerHTML = getOfferPhotos(offer.photos, photosContainer);
 
   return cardTemplate;
 };
 
-export { offersArray, createOffer };
+export { createOffer };
 

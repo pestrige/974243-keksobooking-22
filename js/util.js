@@ -1,3 +1,5 @@
+const ALERT_SHOW_TIME = 5000;
+
 // Генерируем случайное целое число
 
 const generateInt = (a, b) => {
@@ -43,4 +45,19 @@ const debounce = (fn, ms) => {
   };
 };
 
-export { generateInt, generateFloat, isEscEvent, debounce };
+// Показываем сообщение об ошибке
+
+const showAlert = (err) => {
+  const alertContainer = document.createElement('div');
+
+  alertContainer.classList.add('alert-message');
+  alertContainer.textContent = `Ошибка: ${err}. Попробуйте позднее`;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+
+export { generateInt, generateFloat, isEscEvent, debounce, showAlert };

@@ -1,6 +1,7 @@
 /* global L:readonly */
 import { setFormActive } from './form-states.js';
-import { offersArray, createOffer } from './render-offers.js';
+import { createOffer } from './create-offer.js';
+import { getData } from './data.js';
 
 const MAX_FLOAT = 5;
 const CENTER_TOKIO_LAT = 35.66332;
@@ -8,9 +9,35 @@ const CENTER_TOKIO_LNG = 139.78140;
 
 const addressInput = document.querySelector('#address');
 
+// Рендерим маркеры с объявлениями
+const renderOffers = (data) => {
+  data.forEach((offer) => {
+    const { location } = offer;
+    const marker = L.marker(
+      {
+        lat: location.lat,
+        lng: location.lng,
+      },
+      {
+        icon: customPinIcon,
+      },
+    );
+
+    // Добавляем маркеры с балунами
+    marker
+      .addTo(map)
+      .bindPopup(createOffer(offer));
+  });
+};
+
+// Действия после загрузке карты
 const onMapLoad = () => {
-  setFormActive();
   addressInput.value = `${CENTER_TOKIO_LNG}, ${CENTER_TOKIO_LNG}`;
+  setFormActive();
+  getData((data) => {
+    //console.log(data);
+    renderOffers(data);
+  });
 };
 
 // Ставим координаты главного маркера в поле адреса
@@ -26,7 +53,7 @@ const map = L.map('map-canvas')
     lat: CENTER_TOKIO_LAT,
     lng: CENTER_TOKIO_LNG,
   }, 12)
-  .on('load', onMapLoad()); // действие после загрузки карты
+  .on('load', onMapLoad());
 
 const mainPinIcon = L.icon({
   iconUrl: '../img/main-pin.svg',
@@ -60,25 +87,6 @@ L.tileLayer(
 
 // Добавляем главный маркер
 mainPinMarker.addTo(map);
-
-// Рисуем маркеры объявлений
-offersArray.forEach((offer) => {
-  const {location} = offer;
-  const marker = L.marker(
-    {
-      lat: location.x,
-      lng: location.y,
-    },
-    {
-      icon: customPinIcon,
-    },
-  );
-
-  // Добавляем маркеры с балунами
-  marker
-    .addTo(map)
-    .bindPopup(createOffer(offer));
-});
 
 // Подписываемся на перемещение главного маркера
 mainPinMarker.on('moveend', setAddressCoordinates);

@@ -921,6 +921,21 @@ fieldset {
  * Сообщения об успешном и неуспешном создании объявления
  */
 
+.alert-message {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: 35%;
+  z-index: 999;
+  padding: 20px 5px;
+
+  font-size: 2em;
+  text-align: center;
+  color: white;
+  background-color: crimson;
+}
+
 .success,
 .error {
   position: fixed;
