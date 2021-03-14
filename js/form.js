@@ -3,6 +3,7 @@ import { resetAddress, setMarkerDefaults } from './map.js';
 import { showSuccessPopup, showErrorPopup } from './alerts.js';
 import { sendData } from './data.js';
 import { filtersForm } from './filters.js';
+import { avatarContainer, photoContainer, imgHandler, resetImgContainer } from './upload-photos.js';
 
 const CHECK_DELAY = 500;
 const PALACE_ROOMS = 100;
@@ -16,6 +17,8 @@ const timeinSelect = adForm.querySelector('#timein');
 const timeoutSelect = adForm.querySelector('#timeout');
 const roomsSelect = adForm.querySelector('#room_number');
 const guestsSelect = adForm.querySelector('#capacity');
+const avatarInput = adForm.querySelector('#avatar');
+const photoInput = adForm.querySelector('#images');
 
 // Устанавливаем минимальную цену
 const setInputMinPrice = (minValue) => {
@@ -110,6 +113,7 @@ const resetForm = (evt) => {
   setTimeout(() => resetAddress(), 0);
   setMarkerDefaults();
   filtersForm.reset();
+  resetImgContainer();
 };
 
 //Очищаем форму
@@ -130,6 +134,9 @@ const onFormSubmit = (evt) => {
     new FormData(evt.target),
   );
 };
+
+avatarInput.addEventListener('change', imgHandler(avatarContainer));
+photoInput.addEventListener('change', imgHandler(photoContainer));
 
 typeSelect.addEventListener('change', onTypeSelectChange);
 timeFieldset.addEventListener('change', onTimeSelectChange);
