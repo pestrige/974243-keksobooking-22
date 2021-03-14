@@ -1,4 +1,4 @@
-import { showAlert } from './messages.js';
+import { showAlert } from './alerts.js';
 
 // Получаем массив данных с сервера
 const getData = (onSuccess) => {

@@ -1,6 +1,6 @@
 import { debounce } from './util.js';
 import { resetAddress, setMarkerDefaults } from './map.js';
-import { showSuccessPopup, showErrorPopup } from './messages.js';
+import { showSuccessPopup, showErrorPopup } from './alerts.js';
 import { sendData } from './data.js';
 import { filtersForm } from './filters.js';
 
@@ -11,6 +11,7 @@ const adForm = document.querySelector('.ad-form');
 const typeSelect = adForm.querySelector('#type');
 const titleInput = adForm.querySelector('#title');
 const priceInput = adForm.querySelector('#price');
+const timeFieldset = adForm.querySelector('.ad-form__element--time');
 const timeinSelect = adForm.querySelector('#timein');
 const timeoutSelect = adForm.querySelector('#timeout');
 const roomsSelect = adForm.querySelector('#room_number');
@@ -131,8 +132,7 @@ const onFormSubmit = (evt) => {
 };
 
 typeSelect.addEventListener('change', onTypeSelectChange);
-timeinSelect.addEventListener('change', onTimeSelectChange);
-timeoutSelect.addEventListener('change', onTimeSelectChange);
+timeFieldset.addEventListener('change', onTimeSelectChange);
 titleInput.addEventListener('input', onTitleInputDebouncedInput);
 priceInput.addEventListener('input', onPriceInputDebouncedInput);
 roomsSelect.addEventListener('change', onSelectChange);

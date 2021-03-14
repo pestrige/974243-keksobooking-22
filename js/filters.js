@@ -1,4 +1,4 @@
-import { createMarkers, removeMarkers } from './map.js';
+import { MAX_OFFERS_COUNT, createMarkers, removeMarkers } from './map.js';
 import { debounce } from './util.js';
 
 const NO_FILTER = 'any';
@@ -69,7 +69,8 @@ const filtersHandler = (offersArray) => {
       .filter(sortingByPrice)
       .filter(sortingByRooms)
       .filter(sortingByGuests)
-      .filter(sortingByFeatures);
+      .filter(sortingByFeatures)
+      .slice(0, MAX_OFFERS_COUNT);
 
     removeMarkers();
     createMarkers(sortedOfferArray);

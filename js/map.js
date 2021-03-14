@@ -9,15 +9,19 @@ const DEFAULT_COORDINATES = {
   lat: 35.66332,
   lng: 139.78141,
 };
+const MAX_OFFERS_COUNT = 10;
 
 const addressInput = document.querySelector('#address');
 const markers = [];
+//const slicedMarkers = [];
 
 const resetAddress = () => addressInput.value = `${DEFAULT_COORDINATES.lat}, ${DEFAULT_COORDINATES.lng}`;
 
 // Создаем маркеры и добавляем их на карту
 const createMarkers = (offersArray) => {
-  offersArray.forEach((offer) => {
+  const slicedOffersArray = offersArray.slice(0, MAX_OFFERS_COUNT);
+
+  slicedOffersArray.forEach((offer) => {
     const { location } = offer;
     const marker = L.marker(
       {
@@ -114,4 +118,4 @@ mainPinMarker.addTo(map);
 // Подписываемся на перемещение главного маркера
 mainPinMarker.on('moveend', setAddressCoordinates);
 
-export { resetAddress, setMarkerDefaults, createMarkers, removeMarkers };
+export { MAX_OFFERS_COUNT, resetAddress, setMarkerDefaults, createMarkers, removeMarkers };
