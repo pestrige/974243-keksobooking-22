@@ -22,7 +22,7 @@ const filtersHandler = (offersArray) => {
       if (filterValue === NO_FILTER) {
         return true;
       } else {
-        return filterValue == offerKey ? true : false;
+        return filterValue === String(offerKey);
       }
     };
 
