@@ -3,7 +3,7 @@ import { resetAddress, setMarkerDefaults } from './map.js';
 import { showSuccessPopup, showErrorPopup } from './alerts.js';
 import { sendData } from './data.js';
 import { filtersForm } from './filters.js';
-import { avatarContainer, photoContainer, imgHandler, resetImgContainer } from './upload-photos.js';
+import { avatarContainer, photoContainer, imgHandler, resetImgContainer } from './uploaded-photos.js';
 
 const CHECK_DELAY = 500;
 const PALACE_ROOMS = 100;
@@ -135,15 +135,20 @@ const onFormSubmit = (evt) => {
   );
 };
 
-avatarInput.addEventListener('change', imgHandler(avatarContainer));
-photoInput.addEventListener('change', imgHandler(photoContainer));
+// Обработчик событий формы
+const setFormHandlers = () => {
+  avatarInput.addEventListener('change', imgHandler(avatarContainer));
+  photoInput.addEventListener('change', imgHandler(photoContainer));
 
-typeSelect.addEventListener('change', onTypeSelectChange);
-timeFieldset.addEventListener('change', onTimeSelectChange);
-titleInput.addEventListener('input', onTitleInputDebouncedInput);
-priceInput.addEventListener('input', onPriceInputDebouncedInput);
-roomsSelect.addEventListener('change', onSelectChange);
-guestsSelect.addEventListener('change', onSelectChange);
+  typeSelect.addEventListener('change', onTypeSelectChange);
+  timeFieldset.addEventListener('change', onTimeSelectChange);
+  titleInput.addEventListener('input', onTitleInputDebouncedInput);
+  priceInput.addEventListener('input', onPriceInputDebouncedInput);
+  roomsSelect.addEventListener('change', onSelectChange);
+  guestsSelect.addEventListener('change', onSelectChange);
 
-adForm.addEventListener('reset', onFormReset);
-adForm.addEventListener('submit', onFormSubmit);
+  adForm.addEventListener('reset', onFormReset);
+  adForm.addEventListener('submit', onFormSubmit);
+};
+
+export { setFormHandlers };

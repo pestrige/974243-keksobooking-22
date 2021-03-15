@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="./css/normalize.css">
-  <link rel="stylesheet" href="./leaflet/leaflet.css">
+  <link rel="stylesheet" href="./css/leaflet.css">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
   <title>Кексобукинг</title>
@@ -87,7 +87,7 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="title">Заголовок объявления</label>
-          <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио" minlength="30" maxlength="100">
+          <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио" minlength="30" maxlength="100" required>
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес (координаты)</label>
@@ -229,9 +229,7 @@
     </div>
   </template>
 
-  <script src="./js/deacivate-form.js"></script>
-  <script src="./leaflet/leaflet.js"></script>
-  <script src="./js/main.js" type="module"></script>
+  <script src="./js/main.bundle.js"></script>
 
 </body>
 </html>
